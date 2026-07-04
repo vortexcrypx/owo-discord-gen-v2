@@ -5,7 +5,8 @@ import json
 import colorama
 from colorama import Fore, Style
 import sys
-
+import discordrpc
+import time
 
 if sys.version_info >= (3, 14):
     try:
@@ -25,8 +26,6 @@ intents = discord.Intents.all()
 vortex = commands.Bot(command_prefix=prefix, intents=intents, self_bot=True)
 @vortex.event
 async def on_ready():
-    activity = discord.Streaming(name="CrypZ On Top! | ^help", url="https://discord.gg/hdJWfpTzXm")
-    await vortex.change_presence(status=discord.Status.online, activity=activity)
     print(Fore.GREEN +"""
 ██╗░░░██╗░█████╗░██████╗░████████╗███████╗██╗░░██╗░░░███████╗██╗░░██╗███████╗
 ██║░░░██║██╔══██╗██╔══██╗╚══██╔══╝██╔════╝╚██╗██╔╝░░░██╔════╝╚██╗██╔╝██╔════╝
@@ -37,6 +36,21 @@ async def on_ready():
     print(Fore.GREEN + f'+ | Logged in as {vortex.user} (ID: {vortex.user.id})')
     print(Fore.GREEN + '+ | Join our Discord: https://discord.gg/G7SXNJB6Qq')
     print('----------------------------------------------------------------')
+
+
+rpc = discordrpc.RPC(app_id=1522928580492005406)
+
+rpc.set_activity(
+      state="CrypZUwU.exe",
+      details="Grinding!",
+      large_image="crypzuwu",
+      large_text="CrypZUwU",
+      small_image="crypzpy",
+      small_text="CrypZPY",
+      buttons=[{"label": "Join our Discord!", "url": "https://discord.gg/G7SXNJB6Qq"}]
+        
+    )
+
 
 @vortex.command()
 async def ping(ctx):
@@ -239,3 +253,4 @@ async def stop(ctx):
 
 
 vortex.run(token, bot=False)
+rpc.run()
